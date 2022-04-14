@@ -1,0 +1,137 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<style>
+			.paymentlogo{
+				width:30px; height:30px;
+			}
+			
+			.productImg{
+				width:540px; height:675px;
+			}
+			
+		</style>
+	</head>
+	
+	
+	<body>
+	
+
+		<center><h2 style="margin-top:50px;">White Hoodie<h2>
+		<img class="img-fluid productImg"src="images/HoodieWhiteW.jpeg"/></center>
+		
+		
+		<center><p style="font-size:18pt;">Choose your method of payment</p></center>
+		<!-- paypal -->
+		
+		<center><h4 style="margin-top:50px;">Payal<img class="img-fluid paymentlogo"src="images/paypalLogo.jpg"/></h4></center>
+<script type="text/javascript">
+function incrementValue()
+{
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value<10){
+        value++;
+            document.getElementById('number').value = value;
+    }
+}
+function decrementValue()
+{
+    var value= parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value>1){
+        value--;
+            document.getElementById('number').value = value;
+    }
+
+}
+</script> <!-- Set up a container element for the button -->
+
+<div style="text-align:left;" class="cart-attribute__field" data-mce-style="text-align: left;">
+<center><label style="font-size:20pt; margin-top:20px;"><b>Size:</b></label></center>
+<center>
+<select class="colorQuantity" style="width:25%; padding:10px; padding-left:15px; padding-right:10px; border-radius:5px; background-color:#292929; color:white" id="size_id" name="”quantity”" data-mce-style="width: 75%;">
+
+<option value="”XS”">XS</option>
+<option value="”S”">S</option>
+<option value="”L”">L</option>
+<option value="”XL”">XL</option>
+</select>
+</center>
+</div>
+
+
+<center><p style="font-size:20pt"><strong>Select Product Quantity:</strong></p></center>
+<div class="container" style="text-align:center; margin-top:0px;">
+<input style="padding:10px; padding-left:15px; padding-right:15px; background-color:#292929; border-radius:5px; color:white" value="-" type="button" onclick="decrementValue()"> 
+<input style="text-align: center; padding:10px; background-color:#292929; color:white" id="number" size="1" max="10" maxlength="2" value="1" name="quantity" type="text"> 
+<input style="padding:10px; padding-left:15px; padding-right:15px;background-color:#292929; border-radius:5px; color:white" value="+" type="button" onclick="incrementValue()"></div>
+<br><br>
+
+<center>
+	<div class="text-center container-fluid" style="align-text:center" id="paypal-button-container">
+		<div class="text-center container-fluid" style="width:100%;" id="paypal-button-container"></div>
+	</div>
+</center>
+
+<!-- Include the PayPal JavaScript SDK --> <script src="https://www.paypal.com/sdk/js?client-id=AZ4QiIipBXtMGdj_xLhyzntvvp-GUL74Ch2ZmxgSExmpgCqN3OsH1nyxh0YOs3MuB1EhG7D74215FBbT&amp;currency=USD"></script> <script>
+<!-- id = "AZW519KlG_cq-s3MxzYH6ijIX-Zve4jOMgBCbWc_itt9uG1wlZGAfpUUP2lVYNL6z2Jh74Vv63Qqone4" -->
+  
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                
+var product = document.getElementById("number").value + '/White Hoodie/';
+product = product + document.getElementById("size_id").value
+var price = 11.60 * document.getElementById("number").value
+
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: price
+                        },
+                        description: product
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+	
+	
+	
+	
+	<center><h4 style="margin-top:100px;">Juice <img class="img-fluid paymentlogo"src="images/juiceLogo.png"/></h4>
+	<p style="font-size:15pt;  margin-bottom:50px; padding:5px;">Juice either on 
+	<br>mobile number: 52501697</br>
+	Or account number: 000448330822
+	<br>For description write: #The number of item/ #Product name/ #Size</br>
+	For example: <b>2/White Hoodie/XS</b>
+	</p></center>
+	
+	
+	</body>
+	
+	
+</html>
